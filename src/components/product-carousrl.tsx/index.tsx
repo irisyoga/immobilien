@@ -2,6 +2,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -12,7 +13,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-export default function ProductCarousel() {
+export default function ProductCarousel({images}: {images: string[]}) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -33,11 +34,11 @@ return (
     <div className="mx-auto max-w-[10rem] sm:max-w-xs">
       <Carousel setApi={setApi} className="w-full max-w-xs">
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {images.map((image, index) => (
             <CarouselItem key={index}>
               <Card className="m-px">
                 <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
+                 <Image src={image} width={100} height={100} alt={"product"} unoptimized/>
                 </CardContent>
               </Card>
             </CarouselItem>
